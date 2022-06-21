@@ -1,5 +1,5 @@
-import BaseConfig
-from dao.model.movieModel import Movie
+from flask import current_app
+from project.dao.model.movieModel import Movie
 
 
 class MovieDAO:
@@ -15,7 +15,7 @@ class MovieDAO:
         if status == "new" and page is not None:
             page_int = int(page)
             movies_fresh = movies.order_by(Movie.year.desc())
-            movies_fresh_and_paged = movies_fresh.paginate(page_int, BaseConfig.BaseConfig.ITEMS_PER_PAGE, False)
+            movies_fresh_and_paged = movies_fresh.paginate(page_int, current_app.config.ITEMS_PER_PAGE, False)
             return movies_fresh_and_paged.items
 
         if status == "new":
@@ -23,7 +23,7 @@ class MovieDAO:
 
         if page is not None:
             page_int = int(page)
-            movies = movies.paginate(page_int, BaseConfig.BaseConfig.ITEMS_PER_PAGE, False)
+            movies = movies.paginate(page_int, current_app.config.ITEMS_PER_PAGE, False)
             return movies.items
 
         else:

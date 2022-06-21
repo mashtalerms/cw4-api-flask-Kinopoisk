@@ -4,9 +4,9 @@ import hmac
 
 from werkzeug.exceptions import MethodNotAllowed
 
-from dao.userDao import UserDAO
-from exceptions import ItemNotFound, IncorrectPassword, UserAlreadyExists
-from helpers.constants import PWD_HASH_SALT, PWD_HASH_ITERATIONS
+from project.dao.userDao import UserDAO
+from project.exceptions import ItemNotFound, IncorrectPassword, UserAlreadyExists
+from flask import current_app
 
 
 class UserService:
@@ -58,8 +58,8 @@ class UserService:
         hash_digest = hashlib.pbkdf2_hmac(
             'sha256',
             password.encode('utf-8'),
-            PWD_HASH_SALT,
-            PWD_HASH_ITERATIONS
+            current_app.config.get("PWD_HASH_SALT"),
+            current_app.config.get("PWD_HASH_ITERATIONS")
         )
         return hash_digest
 

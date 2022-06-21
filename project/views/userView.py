@@ -1,9 +1,9 @@
 from flask import request
 from flask_restx import Resource, Namespace
 
-from dao.model.userModel import UserSchema
-from helpers.decorators import auth_required
-from implemented import user_service, auth_service, movie_service, user_movie_service
+from project.dao.model.userModel import UserSchema
+from project.helpers.decorators import auth_required
+from project.implemented import user_service, auth_service, movie_service, user_movie_service
 
 user_ns = Namespace('user')
 user_schema = UserSchema()
@@ -44,6 +44,8 @@ class UserPasswordView(Resource):
         user_service.update_password(passwords, email)
         return "", 200
 
+
+### Задание со звездочкой
 
 @user_ns.route('/favorites/movies/<int:mid>/')
 class UserMovieView(Resource):

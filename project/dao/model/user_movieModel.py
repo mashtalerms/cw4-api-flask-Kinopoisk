@@ -1,12 +1,13 @@
 from marshmallow import Schema, fields
 
-from dao.model.movieModel import MovieSchema
-from dao.model.userModel import UserSchema
-from setup_db import db
+from project.dao.model.movieModel import MovieSchema
+from project.dao.model.userModel import UserSchema
+from project.setup_db import db
 
 
 class UserMovie(db.Model):
 	__tablename__ = 'user_movie'
+	__bind_key__ = 'users'
 	id = db.Column(db.Integer, primary_key=True)
 	user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
 	favorite_movie_id = db.Column(db.Integer, db.ForeignKey("movie.id"), nullable=False)

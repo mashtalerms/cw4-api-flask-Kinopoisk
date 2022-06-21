@@ -1,4 +1,4 @@
-from dao.user_movieDao import UserMovieDAO
+from project.dao.user_movieDao import UserMovieDAO
 
 
 class UserMovieService:

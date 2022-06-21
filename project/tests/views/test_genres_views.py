@@ -1,6 +1,6 @@
 import pytest
 
-from dao.models import Genre
+from project.dao.genreDao import Genre
 
 
 class TestGenresView:

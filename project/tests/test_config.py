@@ -1,7 +1,7 @@
 import os
 
-from BaseConfig import BASEDIR, DevelopmentConfig, TestingConfig
-from server import create_app
+from project.BaseConfig import BASEDIR, DevelopmentConfig, TestingConfig
+from project.server import create_app
 
 
 class TestConfig:

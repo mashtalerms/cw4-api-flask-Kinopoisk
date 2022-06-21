@@ -1,5 +1,9 @@
+import os, sys
+path = os.path.abspath('.')
+sys.path.insert(1, path)
+
 from project.BaseConfig import DevelopmentConfig
-from project.dao.models import *  # noqa F401, F403
+from project.dao.model import movieModel, genreModel, directorModel, userModel
 from project.server import create_app
 from project.setup_db import db
 

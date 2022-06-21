@@ -1,4 +1,4 @@
-from dao.movieDao import MovieDAO
+from project.dao.movieDao import MovieDAO
 
 
 class MovieService:

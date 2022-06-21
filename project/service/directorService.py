@@ -1,4 +1,4 @@
-from dao.directorDao import DirectorDAO
+from project.dao.directorDao import DirectorDAO
 
 
 class DirectorService:

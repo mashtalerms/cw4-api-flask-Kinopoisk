@@ -1,4 +1,4 @@
-from dao.model.user_movieModel import UserMovie
+from project.dao.model.user_movieModel import UserMovie
 
 
 class UserMovieDAO:

@@ -2,10 +2,10 @@ import calendar
 import datetime
 
 import jwt
+from flask import current_app
 from flask_restx import abort
 
-from service.userService import UserService
-from helpers.constants import secret, algo
+from project.service.userService import UserService
 
 
 class AuthService:
@@ -27,11 +27,17 @@ class AuthService:
 
         min30 = datetime.datetime.utcnow() + datetime.timedelta(minutes=30)
         data["exp"] = calendar.timegm(min30.timetuple())
-        access_token = jwt.encode(data, secret, algorithm=algo)
+        access_token = jwt.encode(
+            data,
+            current_app.config.get('JWT_SECRET'),
+            algorithm=current_app.config.get('JWT_ALGORITHM'))
 
         days130 = datetime.datetime.utcnow() + datetime.timedelta(days=130)
         data["exp"] = calendar.timegm(days130.timetuple())
-        refresh_token = jwt.encode(data, secret, algorithm=algo)
+        refresh_token = jwt.encode(
+            data,
+            current_app.config.get('JWT_SECRET'),
+            algorithm=current_app.config.get('JWT_ALGORITHM'))
 
         return {
             "access_token": access_token,
@@ -39,17 +45,26 @@ class AuthService:
         }
 
     def approve_refresh_token(self, refresh_token):
-        data = jwt.decode(jwt=refresh_token, key=secret, algorithms=[algo])
+        data = jwt.decode(
+            jwt=refresh_token,
+            key=current_app.config.get('JWT_SECRET'),
+            algorithms=[current_app.config.get('JWT_ALGORITHM')])
         email = data.get('email')
 
         return self.generate_tokens(email, None, is_refresh=True)
 
     def get_email_from_token(self, token):
-        data = jwt.decode(token, secret, algorithms=[algo])
+        data = jwt.decode(
+            token,
+            current_app.config.get('JWT_SECRET'),
+            algorithms=[current_app.config.get('JWT_ALGORITHM')])
         email = data.get('email')
         return email
 
     def get_user_id_from_token(self, token):
-        data = jwt.decode(token, secret, algorithms=[algo])
+        data = jwt.decode(
+            token,
+            current_app.config.get('JWT_SECRET'),
+            algorithms=[current_app.config.get('JWT_ALGORITHM')])
         id = data.get('id')
         return id

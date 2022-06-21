@@ -1,8 +1,8 @@
 from flask import request, abort
 from flask_restx import Resource, Namespace
 
-from dao.model.userModel import UserSchema
-from implemented import auth_service, user_service
+from project.dao.model.userModel import UserSchema
+from project.implemented import auth_service, user_service
 
 auth_ns = Namespace('auth')
 user_schema = UserSchema()

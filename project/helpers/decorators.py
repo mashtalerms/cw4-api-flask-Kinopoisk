@@ -1,7 +1,5 @@
 import jwt
-from flask import request, abort
-
-from helpers.constants import algo, secret
+from flask import request, abort, current_app
 
 
 def auth_required(func):
@@ -11,7 +9,10 @@ def auth_required(func):
         data = request.headers['Authorization']
         token = data.split("Bearer ")[-1]
         try:
-            jwt.decode(token, secret, algorithms=[algo])
+            jwt.decode(
+                token,
+                current_app.config.get('JWT_SECRET'),
+                algorithms=[current_app.config.get('JWT_ALGORITHM') ])
         except Exception as e:
             print(f"Traceback: {e}")
             abort(401)
