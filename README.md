@@ -4,4 +4,28 @@
 ### Project made with index.html, set port to :25000
 
 
-#### I ve only done main part, second part is commented
+
+
+
+# SkyPro Python Course #
+
+
+## Mashtaler Maksim 06/2022
+Movie selection service
+
+# Description #
+
+
+### Stack ###
+- python3.9, Flask - backend
+- sqlalchemy - database
+
+
+## How to: ##
+
+## Development local configuration ##
+1) Create venv
+2) Install dependencies
+   - `pip install -r requirements.txt`
+3) Run server 
+   - `run flask run`
